@@ -25,9 +25,8 @@ public class JwtTokenFilter extends GenericFilterBean {
             bearerToken = bearerToken.substring(7);
         }
 
-//        TODO: implement isValid method
 
-        if (bearerToken != null && jwtTokenProvider.isValid(bearerToken)) {
+        if (bearerToken != null && jwtTokenProvider.validateToken(bearerToken)) {
             try {
                 Authentication authentication = jwtTokenProvider.getAuthentication(bearerToken);
                 if (authentication != null) {
