@@ -61,7 +61,7 @@ public class JwtTokenProvider {
                 .collect(toList());
     }
 
-    private String createRefreshToken(Long userId, String username) {
+    public String createRefreshToken(Long userId, String username) {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("id", userId);
         Date now = new Date();
