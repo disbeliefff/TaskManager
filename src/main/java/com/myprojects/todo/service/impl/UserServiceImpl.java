@@ -1,5 +1,6 @@
 package com.myprojects.todo.service.impl;
 
+import com.myprojects.todo.domain.user.Role;
 import com.myprojects.todo.domain.user.User;
 import com.myprojects.todo.exception.ResourceNotFoundException;
 import com.myprojects.todo.repository.UserRepository;
@@ -8,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
+
 
 @Service
 @RequiredArgsConstructor
@@ -49,7 +53,12 @@ public class UserServiceImpl implements UserService {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.create(user);
+
+        var roles = Set.of(Role.ROLE_USER);
+        user.setRoles(roles);
+
         return user;
+
     }
 
     @Override
